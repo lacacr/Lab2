@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+<h2>{{category.nome}}</h2>
+{% if category_list %}
+<section class="lista-de-cards">
+    {% for post in catefory_list %}
+    <article class="card">
+      <a href="{% url 'blog:detail' post.id %}">details</a>
+      <p>{{ post.título }} ({{ post.data_de_postagem }})</p>
+    </article>
+  {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhum post.</p>
+{% endif %} {% endblock content %}

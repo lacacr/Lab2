@@ -16,3 +16,8 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-data_da_postagem']
+
+class Category(models.Model):
+    nome = models.CharField(max_length=100)
+    descrição = models.TextField()
+    post = models.ManyToManyField(Post)

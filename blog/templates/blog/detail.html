@@ -35,5 +35,20 @@
 
         <a href="{% url 'blog:comment' post.id %}"><button>Crie seu Comentário</button></a>
     </section>
+
+    <section>
+        <header>
+            <h3>Categorias</h3>
+        </header>
+        <ul>
+            {% if post.category_set.all %}
+                {% for category in post.category_set.all %}
+                    <a href="{% url 'blog:category' category.id %}">{{ category.nome }}</a>
+                {% endfor %}
+            {% else %}
+                <p>Ainda não existe nenhuma categoria para este post.</p>
+            {% endif %}
+        </ul>
+    </section>
     
     {% endblock content %}

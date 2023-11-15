@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .form import PostForm, CommentForm
 
 # Create your views here.
@@ -55,3 +55,11 @@ def create_comment(request, post_id):
         form = CommentForm()
     context = {'form': form, 'post': post}
     return render(request, 'blog/comment.html', context)
+
+class category_detail(DetailView):
+    model = Category
+    template_name = 'blog/category.html'
+
+class category_list(ListView):
+    model = Category
+    template_name = 'blog/categories.html'

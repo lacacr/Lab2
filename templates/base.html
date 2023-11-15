@@ -12,14 +12,15 @@
 
 <body>
     <header id="cabecalho-principal">
-        <a href="{% url 'index' %}">
-            <p>WTF</p>
+        <a href="{% url 'blog:index' %}">
+            <p>Blog</p>
         </a>
         <nav id="navegacao-principal">
             <ul>
-                <li><a href="{% url 'about' %}">Sobre</a></li>
+              <li><a href="{% url 'blog:index' %}">Post</a></li>
+              <li><a href="{% url 'blog:create' %}">Create</a></li>
             </ul>
-        </nav>
+          </nav>
 
     </header>
     <main id="conteiner-principal">

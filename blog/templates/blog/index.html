@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Todos os Filmes</h2>
+{% if movie_list %}
+<section class="lista-de-cards">
+    {% for post in post_list %}
+    <article class="card">
+      <a href="{% url 'blog:detail' post.id %}"></a>
+      <p>{{ post.título }} ({{ post.data_de_postagem }})</p>
+    </article>
+  {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhum post.</p>
+{% endif %} {% endblock content %}

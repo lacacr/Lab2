@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Inserir Novo Post</h2>
+<form method="POST" action="{% url 'blog:create' %}">
+  {% csrf_token %}
+  <p>
+    <label for="id_título">Título:</label>
+    <input type="text" name="título" id="id_título" />
+  </p>
+  <p>
+    <label for="id_data_de_postagem">Data de Postagem:</label>
+    <input type="datetime" name="data_de_postagem" id="id_data_de_postagem" />
+  </p>
+  <p>
+    <label for="id_conteúdo">Conteúdo:</label>
+    <input type="text" name="conteúdo" id="id_conteúdo" />
+  </p>
+  <button type="submit">Criar</button>
+</form>
+
+{% endblock content %}

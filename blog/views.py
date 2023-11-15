@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from .models import Post
+from .form import PostForm
 
 # Create your views here.
 
@@ -12,7 +13,7 @@ def list_posts(request):
     return render(request, 'blog/index.html', context)
 
 def detail_post(request, post_id):
-    post = get_object_or_404(pk=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     context = {'post': post}
     return render(request, 'blog/detail.html', context)
 
@@ -26,30 +27,43 @@ def search_posts(request):
 
 def create_post(request):
     if request.method == 'POST':
-        post_título = request.POST['título']
-        post_data_de_postagem = request.POST['data_de_postagem']
-        post_conteúdo = request.POST['conteúdo']
-        post = Post(título=post_título,
-                      data_de_postagem=post_data_de_postagem,
-                      conteúdo=post_conteúdo)
-        post.save()
-        return HttpResponseRedirect(
-            reverse('blog:detail', args=(post.id, )))
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post_título = form.cleaned_data['título']
+            post_data_de_postagem = form.cleaned_data['data_de_postagem']
+            post_conteúdo = form.cleaned_data['conteúdo']
+            post = Post(título=post_título,
+                          data_de_postagem=post_data_de_postagem,
+                          conteúdo=post_conteúdo)
+            post.save()
+            return HttpResponseRedirect(
+                reverse('blog:detail', args=(post.id, )))
     else:
-        return render(request, 'blog/create.html', {})
+        form = PostForm()
+        context = {'form': form}
+        return render(request, 'blog/create.html', context)
     
 def update_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
 
     if request.method == "POST":
-        post.título = request.POST['título']
-        post.data_de_postagem = request.POST['data_de_postagem']
-        post.conteúdo = request.POST['conteúdo']
-        post.save()
-        return HttpResponseRedirect(
-            reverse('blog:detail', args=(post.id, )))
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post.título = form.cleaned_data['título']
+            post.data_de_postagem = form.cleaned_data['data_de_postagem']
+            post.conteúdo = form.cleaned_data['conteúdo']
+            post.save()
+            return HttpResponseRedirect(
+                reverse('blog:detail', args=(post.id, )))
+    else:
+        form = PostForm(
+            initial={
+                'título': post.título,
+                'data_de_postagem': post.data_de_postagem,
+                'conteúdo': post.conteúdo
+            })
 
-    context = {'post': post}
+    context = {'post': post, 'form': form}
     return render(request, 'blog/update.html', context)
 
 

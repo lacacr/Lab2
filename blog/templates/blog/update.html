@@ -3,28 +3,7 @@
 <h2>Atualizar Dados do Post {{ post.título }} ({{ post.data_de_postagem }})</h2>
 <form method="post" action="{% url 'blog:update' post.id%}">
   {% csrf_token %}
-  <p>
-    <label for="id_name">Título:</label>
-    <input type="text" name="título" id="id_título" value="{{ post.título }}" />
-  </p>
-  <p>
-    <label for=" id_data_de_postagem">Data de Postagem:</label>
-    <input
-      type="datetime"
-      name="data_de_postagem"
-      id="id_data_de_postagem"
-      value="{{ post.data_de_postagem }}"
-    />
-  </p>
-  <p>
-    <label for=" id_conteúdo">Conteúdo:</label>
-    <input
-      type="text"
-      name="conteúdo"
-      id="id_conteúdo"
-      value="{{post.conteúdo}}"
-    />
-  </p>
+  {{ form.as_p }}
   <button type="submit">Atualizar</button>
 </form>
 {% endblock content %}

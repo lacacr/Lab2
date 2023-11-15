@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 <h2>Todos os Filmes</h2>
-{% if movie_list %}
+{% if post_list %}
 <section class="lista-de-cards">
     {% for post in post_list %}
     <article class="card">
-      <a href="{% url 'blog:detail' post.id %}"></a>
+      <a href="{% url 'blog:detail' post.id %}">details</a>
       <p>{{ post.título }} ({{ post.data_de_postagem }})</p>
     </article>
   {% endfor %}

@@ -11,5 +11,29 @@
         <li><a href="{% url 'blog:delete' post.id %}">Apagar</a></li>
       </ul>
     </section>
+
+    <hr>
+
+    <section>
+        <header>
+            <h3>Comentários</h3>
+        </header>
+        <ul>
+            {% if post.comment_set.all %}
+                {% for comment in post.comment_set.all %}
+                    <figure>
+                        <blockquote>
+                            "{{ comment.texto }}"
+                        </blockquote>
+                        <figcaption>—{{ comment.autor }}</figcaption>
+                    </figure>
+                {% endfor %}
+            {% else %}
+                <p>Ainda não existe nenhuma comentário para este post.</p>
+            {% endif %}
+        </ul>
+
+        <a href="{% url 'blog:comment' post.id %}"><button>Crie seu Comentário</button></a>
+    </section>
     
     {% endblock content %}

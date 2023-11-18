@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 <h2>{{category.nome}}</h2>
-{% if category_list %}
+{% if category.post.all %}
 <section class="lista-de-cards">
-    {% for post in catefory_list %}
+    {% for post in category.post.all %}
     <article class="card">
       <a href="{% url 'blog:detail' post.id %}">details</a>
       <p>{{ post.título }} ({{ post.data_de_postagem }})</p>
